@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SkiNetBackend.Data;
+using SkiNetBackend.Helpers;
 using SkiNetBackend.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,9 @@ builder.Services.AddDbContext<StoreContext>(
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
+
+// Adding automapper
+builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 var app = builder.Build();
 
@@ -34,6 +38,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+// adding use static files
+app.UseStaticFiles();
 
 app.MapControllers();
 

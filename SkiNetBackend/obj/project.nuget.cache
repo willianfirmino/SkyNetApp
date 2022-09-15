@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "zUowJbcelUTH3AW+SJ41zpDldl8DTvYIfZqOalW+oazMjKFVLjXgteZp6b3tuIx5lHEKfMCjgbNQAtYyNcu6tQ==",
+  "dgSpecHash": "pEn5pxIMOJRgPrzgGpU7Muv5Uc7gAZ8wGJjfLGkCfvLAdNyn4kTd5eCvhlsAk2Ioz5ABCMtF0kU1FLbae3dfhA==",
   "success": true,
   "projectFilePath": "/home/wfirmino/Dev/DotNet/SkiNetApp/SkiNetBackend/SkiNetBackend.csproj",
   "expectedPackageFiles": [
+    "/home/wfirmino/.nuget/packages/automapper/11.0.0/automapper.11.0.0.nupkg.sha512",
+    "/home/wfirmino/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/11.0.0/automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "/home/wfirmino/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
+    "/home/wfirmino/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/home/wfirmino/.nuget/packages/microsoft.data.sqlite.core/6.0.8/microsoft.data.sqlite.core.6.0.8.nupkg.sha512",
     "/home/wfirmino/.nuget/packages/microsoft.entityframeworkcore/6.0.8/microsoft.entityframeworkcore.6.0.8.nupkg.sha512",
     "/home/wfirmino/.nuget/packages/microsoft.entityframeworkcore.abstractions/6.0.8/microsoft.entityframeworkcore.abstractions.6.0.8.nupkg.sha512",
