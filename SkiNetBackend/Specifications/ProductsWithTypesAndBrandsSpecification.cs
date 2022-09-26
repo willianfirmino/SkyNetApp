@@ -1,24 +1,39 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
 using SkiNetBackend.Entities;
 
-namespace SkiNetBackend.Specifications
+namespace SkiNetBackend.Specifications;
+public class ProductsWithTypesAndBrandsSpecification : BaseSpecification<Product>
 {
-    public class ProductsWithTypesAndBrandsSpecification : BaseSpecification<Product>
+    public ProductsWithTypesAndBrandsSpecification(ProductSpecParams productParams)
+        : base(x =>
+            (!productParams.BrandId.HasValue || x.ProducBrandId == productParams.BrandId) &&
+            (!productParams.typeId.HasValue || x.ProductTypeId == productParams.typeId)
+        )
     {
-        public ProductsWithTypesAndBrandsSpecification()
-        {
-            AddInclude(x => x.ProductType);
-            AddInclude(x => x.ProductBrand);
-        }
+        AddInclude(x => x.ProductType);
+        AddInclude(x => x.ProductBrand);
+        AddOrderBy(x => x.Name);
+        ApplyPaging(productParams.pageSize * (productParams.PageIndex - 1), productParams.pageSize);
 
-        public ProductsWithTypesAndBrandsSpecification(int id) : base(x => x.Id == id)
+        if (!string.IsNullOrEmpty(productParams.Sort))
         {
-            AddInclude(x => x.ProductType);
-            AddInclude(x => x.ProductBrand);
+            switch (productParams.Sort)
+            {
+                case "priceAsc":
+                    AddOrderBy(p => p.Price);
+                    break;
+                case "priceDesc":
+                    AddOrderByDescending(p => p.Price);
+                    break;
+                default:
+                    AddOrderBy(n => n.Name);
+                    break;
+            }
         }
+    }
+
+    public ProductsWithTypesAndBrandsSpecification(int id) : base(x => x.Id == id)
+    {
+        AddInclude(x => x.ProductType);
+        AddInclude(x => x.ProductBrand);
     }
 }

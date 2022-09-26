@@ -23,6 +23,11 @@ builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 var app = builder.Build();
 
+// Use custom middleware
+// app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseStatusCodePagesWithReExecute("/errors/{0}");
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

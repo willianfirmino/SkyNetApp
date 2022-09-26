@@ -8,8 +8,7 @@ using SkiNetBackend.Specifications;
 namespace SkiNetBackend.Controllers;
 
 
-[Route("api/[controller]")]
-public class ProductsController : ControllerBase
+public class ProductsController : BaseApiController
 {
     private readonly IGenericRepository<Product> _productsRepo;
     public IGenericRepository<ProductBrand> _productBrandRepo;
@@ -26,9 +25,10 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyList<ProductsToReturnDto>>> GetProducts()
+    public async Task<ActionResult<IReadOnlyList<ProductsToReturnDto>>> GetProducts(
+       ProductSpecParams productParams)
     {
-        var spec = new ProductsWithTypesAndBrandsSpecification();
+        var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
         var products = await _productsRepo.ListAsync(spec);
         return Ok(_mapper
             .Map<IReadOnlyList<Product>, IReadOnlyList<ProductsToReturnDto>>(products));
@@ -39,6 +39,9 @@ public class ProductsController : ControllerBase
     {
         var spec = new ProductsWithTypesAndBrandsSpecification(id);
         var product = await _productsRepo.GetEntityWitSpec(spec);
+
+        if (product == null) return NotFound();
+
         return _mapper.Map<Product, ProductsToReturnDto>(product);
     }
 
